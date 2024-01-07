@@ -1,7 +1,10 @@
 CV-as-a-bot
 ===========
-![](./query1.png)
-![](./query2.png)
+
+Examples of valid answers: <br>
+![](./img/query1.png)
+![](./img/query2.png)
+![](./img/query3.png)
 
 Ask this RAG LLM chatbot anything you want to learn about my Curriculum Vitae
 
