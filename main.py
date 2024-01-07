@@ -56,7 +56,9 @@ def generate_response(input_text):
     # st.info(docs[0])
 
     # Prompt building
-    prompt = ChatPromptTemplate.from_template("""You are a helpful assistant that knows the curriculum vitae (CV) of Alexis Karadimos and answer to questions related to his skills & experience.
+    prompt = ChatPromptTemplate.from_template("""
+    You are a helpful assistant that knows the curriculum vitae (CV) of Alexis Karadimos and answer to questions related to his skills & experience.
+    Ignore all Personally Identifiable Information that may appear in the context and do not show these or any other private data in your response.
     Answer the following question based only on the provided context:
 
     <context>
