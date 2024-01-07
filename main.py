@@ -34,14 +34,18 @@ def generate_response(input_text):
     # RAG - Retrieval chain
     loader = WebBaseLoader("https://github.com/karadalex")
     docs = loader.load()
+    # Debug documents
+    # st.info("Total documents: "+str(len(docs)))
+    # st.info(docs[0])
+    # Create embeddings and store them as vectors
     embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
     text_splitter = RecursiveCharacterTextSplitter()
     documents = text_splitter.split_documents(docs)
     vector = DocArrayInMemorySearch.from_documents(documents, embeddings)
 
     # Similarity search for debugging
-    docs = vector.similarity_search(input_text)
-    st.info(docs[0])
+    # docs = vector.similarity_search(input_text)
+    # st.info(docs[0])
 
     # Prompt building
     prompt = ChatPromptTemplate.from_template("""You are a helpful assistant that knows the curriculum vitae (CV) of Alexis Karadimos and answer to questions related to his skills & experience.
@@ -67,7 +71,7 @@ def generate_response(input_text):
 
 
 with st.form("my_form"):
-    text = st.text_area("Enter text:", "Which programming languages does @karadalex know?")
+    text = st.text_area("Enter text:", "Which programming languages has @karadalex used in his Github repositories?")
     submitted = st.form_submit_button("Submit")
     if not openai_api_key:
         st.info("Please add your OpenAI API key to continue.")
