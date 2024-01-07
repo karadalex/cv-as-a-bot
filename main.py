@@ -13,6 +13,7 @@ from langchain_community.vectorstores import DocArrayInMemorySearch
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
+from langchain_community.document_loaders import PyPDFLoader
 
 
 
@@ -35,16 +36,23 @@ def generate_response(input_text):
     loader = WebBaseLoader("https://github.com/karadalex")
     docs = loader.load()
     # Debug documents
-    # st.info("Total documents: "+str(len(docs)))
     # st.info(docs[0])
     # Create embeddings and store them as vectors
     embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
     text_splitter = RecursiveCharacterTextSplitter()
     documents = text_splitter.split_documents(docs)
+
+    # Load PDF (e.g. CV as a pdf)
+    loader = PyPDFLoader("data/cv.pdf")
+    pages = loader.load_and_split()
+    documents += pages
+    # st.info(pages[0])
+
+    st.info("Total documents: "+str(len(documents)))
     vector = DocArrayInMemorySearch.from_documents(documents, embeddings)
 
     # Similarity search for debugging
-    # docs = vector.similarity_search(input_text)
+    docs = vector.similarity_search(input_text)
     # st.info(docs[0])
 
     # Prompt building

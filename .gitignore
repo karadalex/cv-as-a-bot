@@ -171,3 +171,6 @@ pyvenv.cfg
 pip-selfcheck.json
 etc
 share
+
+data/**
+!data/.gitkeep

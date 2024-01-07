@@ -1,6 +1,7 @@
 CV-as-a-bot
 ===========
-![](./screenshot.png)
+![](./query1.png)
+![](./query2.png)
 
 Ask this RAG LLM chatbot anything you want to learn about my Curriculum Vitae
 
